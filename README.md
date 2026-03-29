@@ -16,8 +16,8 @@ Nosso objetivo é solucionar este problema através de:
 ## 👥 Integrantes
 | Foto | Nome | GitHub | Função no Projeto |
 | :---: | :--- | :---: | :--- |
-| <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Front-End | Documentação |
-| <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Banco de Dados | Documentação |
+| <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Front-End || Documentação |
+| <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Banco de Dados| | Documentação |
 | <img src="https://github.com/paulopoppes-hash.png" width="50px"> | **Paulo Poppes** | [Link](https://github.com/paulopoppes-hash) | Front-End  |
 | <img src="https://github.com/ScardiaSam34.png" width="50px"> | **Samuel Cardia** | [Link](https://github.com/ScardiaSam34) | Front-End  |
 
