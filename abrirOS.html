@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir Ordem de Serviço - Projeto Integrador</title>
+    <link rel="stylesheet" href="./abrirOs.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="top-bar"></div>
+
+    <main>
+        <div class="page-header">
+            <h1>Abrir Ordem de Serviço</h1>
+            <p>Registre uma nova solicitação de manutenção</p>
+        </div>
+
+        <div class="card">
+            <form method="POST" action="#">
+                <!-- Setor + Equipamento -->
+                <div class="grid-2">
+                    <div class="field">
+                        <label class="field-label" for="setor">Setor Responsável</label>
+                        <select id="setor" name="setor" required>
+                            <option value="" disabled selected>Selecione o setor...</option>
+                            <option>Costura</option>
+                            <option>Montagem</option>
+                            <option>Corte</option>
+                            <option>Serigrafia</option>
+                            <option>Administrativo</option>
+                            <option>Outros</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="field-label" for="equipamento">Identificação do Equipamento</label>
+                        <input id="equipamento" name="equipamento" type="text" required
+                            placeholder="Ex: Máquina de costura #12">
+                    </div>
+                </div>
+
+                <!-- Criticidade -->
+                <div class="criticidade-section">
+                    <label class="field-label">Criticidade</label>
+                    <div class="radio-grid">
+                        <label class="radio-card" id="card-baixa">
+                            <input type="radio" name="criticidade" value="baixa">
+                            <span>Baixa</span>
+                        </label>
+                        <label class="radio-card" id="card-media">
+                            <input type="radio" name="criticidade" value="media">
+                            <span>Média</span>
+                        </label>
+                        <label class="radio-card checked" id="card-alta">
+                            <input type="radio" name="criticidade" value="alta" checked>
+                            <span>Alta</span>
+                        </label>
+                    </div>
+
+                    <div id="warning-message">
+                        <span class="material-symbols-outlined">warning</span>
+                        <div>Equipamento crítico — prioridade urgente proposta automaticamente.</div>
+                    </div>
+                </div>
+
+                <!-- Natureza do Serviço -->
+                <div class="field">
+                    <label class="field-label" for="servico">Natureza do Serviço</label>
+                    <select id="servico" name="servico" required>
+                        <option value="" disabled selected>Selecione o tipo...</option>
+                        <option>Elétrico</option>
+                        <option>Mecânico</option>
+                        <option>Eletromecânico</option>
+                        <option>Hidráulico</option>
+                        <option>Predial</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+
+                <!-- Descrição -->
+                <div class="field">
+                    <label class="field-label" for="descricao">Descrição Detalhada</label>
+                    <textarea id="descricao" name="descricao" rows="4" required
+                        placeholder="Descreva o problema com detalhes..."></textarea>
+                </div>
+
+                <!-- Prioridade (hidden by default) -->
+                <div id="prioridade-container" class="field hidden">
+                    <label class="field-label" for="prioridade">Prioridade Recomendada</label>
+                    <select id="prioridade" name="prioridade" required>
+                        <option value="" disabled selected>Selecione a prioridade...</option>
+                        <option value="baixa">Baixa</option>
+                        <option value="media">Média</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="btn-area">
+                    <button type="submit" class="btn-submit">
+                        Enviar Solicitação
+                        <span class="material-symbols-outlined" style="font-size:1.125rem;">send</span>
+                    </button>
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const criticidadeRadios = document.querySelectorAll('input[name="criticidade"]');
+        const warningMessage = document.getElementById('warning-message');
+        const prioridadeContainer = document.getElementById('prioridade-container');
+        const prioridadeSelect = document.getElementById('prioridade');
+
+        const cardMap = {
+            baixa: document.getElementById('card-baixa'),
+            media: document.getElementById('card-media'),
+            alta:  document.getElementById('card-alta'),
+        };
+
+        function updateVisibility() {
+            const selected = document.querySelector('input[name="criticidade"]:checked').value;
+
+            // Update card checked styles
+            Object.entries(cardMap).forEach(([val, card]) => {
+                if (val === selected) {
+                    card.classList.add('checked');
+                } else {
+                    card.classList.remove('checked');
+                }
+            });
+
+            if (selected === 'alta') {
+                warningMessage.classList.remove('hidden');
+                prioridadeContainer.classList.add('hidden');
+                prioridadeSelect.disabled = true;
+                prioridadeSelect.value = '';
+            } else {
+                warningMessage.classList.add('hidden');
+                prioridadeContainer.classList.remove('hidden');
+                prioridadeSelect.disabled = false;
+            }
+        }
+
+        criticidadeRadios.forEach(radio => {
+            radio.addEventListener('change', updateVisibility);
+        });
+
+        updateVisibility();
+    </script>
+</body>
+
+</html>

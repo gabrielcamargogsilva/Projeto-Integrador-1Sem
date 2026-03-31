@@ -16,11 +16,18 @@ Nosso objetivo é solucionar este problema através de:
 ## 👥 Integrantes
 | Foto | Nome | GitHub | Função no Projeto |
 | :---: | :--- | :---: | :--- |
+<<<<<<< HEAD
+| <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Sem função no momento |
+| <img src="https://github.com/paulopoppes-hash.png" width="50px"> | **Paulo Poppes** | [Link](https://github.com/paulopoppes-hash) | Sem função no momento  |
+| <img src="https://github.com/ScardiaSam34.png" width="50px"> | **Samuel Cardia** | [Link](https://github.com/ScardiaSam34) | Sem função no momento  |
+| <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Sem função no momento  |
+=======
 | <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Front-End, Documentação |
 | <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Banco de Dados, Documentação |
 | <img src="https://github.com/paulopoppes-hash.png" width="50px"> | **Paulo Poppes** | [Link](https://github.com/paulopoppes-hash) | Front-End  |
 | <img src="https://github.com/ScardiaSam34.png" width="50px"> | **Samuel Cardia** | [Link](https://github.com/ScardiaSam34) | Front-End  |
 
+>>>>>>> 68ddf96db46d482794a3d3cf5b4c8a3e6a0da34b
 
 ---
 
