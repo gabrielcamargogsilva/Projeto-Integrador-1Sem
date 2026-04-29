@@ -1,7 +1,6 @@
 
-============================================================
-CENTRAL DE MANUTENÇÃO 4.0 — Dilly Sports
-============================================================
+--CENTRAL DE MANUTENÇÃO 4.0 — Dilly Sports
+
 
 -- TABELA 1: SETOR
 CREATE TABLE setor (
