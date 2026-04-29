@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dilly Sports – Estoque de Peças</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="icon-box">⚙️</div>
+      <div class="brand">Dilly Sports</div>
+      <div class="sub">Manutenção 4.0</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-item">
+          <span class="icon">🏠</span> Painel
+        </div>
+        <div class="nav-item">
+          <span class="icon">📋</span> Ordens de Serviço
+        </div>
+        <div class="nav-item">
+          <span class="icon">👷</span> Técnicos
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-label">Recursos</div>
+        <div class="nav-item active">
+          <span class="icon">📦</span> Recursos
+        </div>
+        <div class="nav-sub">
+          <div class="nav-item active">Estoque</div>
+          <div class="nav-item">Ferramental</div>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-item">
+          <span class="icon">📊</span> Relatórios
+        </div>
+        <div class="nav-item">
+          <span class="icon">👥</span> Usuários
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="nav-item">
+        <span class="icon">⚙️</span> Configurações
+      </div>
+      <div class="nav-item">
+        <span class="icon">🛟</span> Suporte
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN COLUMN ══ -->
+  <div class="main-col">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <span class="topbar-title">Estoque de Peças</span>
+
+      <div class="topbar-tabs">
+        <div class="tab active">Visão Geral</div>
+        <div class="tab">Alertas Críticos</div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn-primary">＋ Cadastrar Peça</button>
+        <button class="icon-btn" title="Notificações">🔔</button>
+        <button class="icon-btn" title="Configurações">⚙️</button>
+        <div class="avatar">DS</div>
+      </div>
+    </header>
+
+    <!-- SCROLLABLE CONTENT -->
+    <main class="content">
+
+      <!-- Alert -->
+      <div class="alert-banner">
+        <div class="left">
+          <span class="warn-icon">⚠️</span>
+          <span>4 peças abaixo do estoque mínimo — reposição necessária</span>
+        </div>
+        <span class="ver">Ver Detalhes</span>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label>Buscar peça...</label>
+          <div class="search-input">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Nome, código ou fabricante..." />
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Categoria</label>
+          <select class="select-input">
+            <option>Todas</option>
+            <option>Mecânico</option>
+            <option>Elétrico</option>
+            <option>Hidráulico</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Status</label>
+          <select class="select-input">
+            <option>Todos</option>
+            <option>OK</option>
+            <option>Baixo</option>
+            <option>Crítico</option>
+          </select>
+        </div>
+
+        <button class="filter-icon-btn" title="Filtros avançados">⊞</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Peça</th>
+              <th>Categoria</th>
+              <th>Qtd. Atual</th>
+              <th>Qtd. Mínima</th>
+              <th>Unidade</th>
+              <th>Nível</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="part-name">Correia dentada A35</div>
+                <div class="part-code">REV-00001</div>
+              </td>
+              <td><span class="cat-badge">Mecânico</span></td>
+              <td><span class="qty critical">2</span></td>
+              <td><span class="qty-min">10</span></td>
+              <td><span class="unit-text">un</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill critical" style="width:20%"></div></div>
+              </td>
+              <td><span class="status-badge critical"><span class="dot"></span>Crítico</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name">Rolamento 6205-ZZ</div>
+                <div class="part-code">REV-00002</div>
+              </td>
+              <td><span class="cat-badge">Mecânico</span></td>
+              <td><span class="qty low">4</span></td>
+              <td><span class="qty-min">8</span></td>
+              <td><span class="unit-text">un</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill low" style="width:50%"></div></div>
+              </td>
+              <td><span class="status-badge low"><span class="dot"></span>Baixo</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name">Disjuntor bipolar 20A</div>
+                <div class="part-code">REV-00003</div>
+              </td>
+              <td><span class="cat-badge">Elétrico</span></td>
+              <td><span class="qty ok">15</span></td>
+              <td><span class="qty-min">5</span></td>
+              <td><span class="unit-text">un</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill ok" style="width:100%"></div></div>
+              </td>
+              <td><span class="status-badge ok"><span class="dot"></span>OK</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name">Mangueira hidráulica 1/2"</div>
+                <div class="part-code">REV-84800</div>
+              </td>
+              <td><span class="cat-badge">Hidráulico</span></td>
+              <td><span class="qty critical">1</span></td>
+              <td><span class="qty-min">4</span></td>
+              <td><span class="unit-text">m</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill critical" style="width:25%"></div></div>
+              </td>
+              <td><span class="status-badge critical"><span class="dot"></span>Crítico</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name">Lubrificante WD-40 500ml</div>
+                <div class="part-code">REV-71202</div>
+              </td>
+              <td><span class="cat-badge">Mecânico</span></td>
+              <td><span class="qty ok">22</span></td>
+              <td><span class="qty-min">10</span></td>
+              <td><span class="unit-text">un</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill ok" style="width:100%"></div></div>
+              </td>
+              <td><span class="status-badge ok"><span class="dot"></span>OK</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name">Fusível NH 63A</div>
+                <div class="part-code">REV-00063</div>
+              </td>
+              <td><span class="cat-badge">Elétrico</span></td>
+              <td><span class="qty low">6</span></td>
+              <td><span class="qty-min">10</span></td>
+              <td><span class="unit-text">un</span></td>
+              <td>
+                <div class="level-bar"><div class="level-bar-fill low" style="width:60%"></div></div>
+              </td>
+              <td><span class="status-badge low"><span class="dot"></span>Baixo</span></td>
+              <td>
+                <div class="actions">
+                  <span class="action-link">Editar</span>
+                  <span class="action-link">Registrar entrada</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-footer">
+          <span class="info">Exibindo 6 de 142 itens</span>
+          <div class="pagination">
+            <button class="page-btn">‹</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">›</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom stat cards -->
+      <div class="bottom-cards">
+        <div class="stat-card">
+          <div class="card-label">Saída de peças mensal</div>
+          <div class="card-value-row">
+            <div class="card-value">428</div>
+            <span class="card-delta">▲ +13%</span>
+          </div>
+          <div class="mini-bars">
+            <div class="mini-bar" style="height:30%"></div>
+            <div class="mini-bar" style="height:45%"></div>
+            <div class="mini-bar" style="height:35%"></div>
+            <div class="mini-bar" style="height:55%"></div>
+            <div class="mini-bar" style="height:40%"></div>
+            <div class="mini-bar" style="height:60%"></div>
+            <div class="mini-bar active" style="height:80%"></div>
+          </div>
+        </div>
+
+        <div class="stat-card alert">
+          <div class="card-label">Peças baixo estoque</div>
+          <div class="card-value">08</div>
+          <div class="card-icon">📦</div>
+        </div>
+
+        <div class="stat-card danger">
+          <div class="card-label">Alertas críticos</div>
+          <div class="card-value">04</div>
+          <div class="card-icon">🚨</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
