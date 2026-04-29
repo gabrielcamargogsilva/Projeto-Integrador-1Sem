@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Manutenção 4.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="logo">Central de Manutenção 4.0</h1>
+            <div class="user-actions">
+                <div class="user-profile">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="user-name">João Silva</span>
+                </div>
+                <button class="btn-icon" aria-label="Sair">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <section class="welcome-section">
+            <div class="welcome-text">
+                <span class="subtitle">Dashboard do Solicitante</span>
+                <h2>Olá, João Silva.</h2>
+                <p>O que precisa de manutenção hoje?</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon icon-blue">
+                        <span class="material-symbols-outlined">pending_actions</span>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value">03</span>
+                        <span class="stat-label">Em Aberto</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-orange">
+                        <span class="material-symbols-outlined">check_circle</span>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Este Mês</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <button class="main-action-btn">
+            <div class="plus-circle">
+                <span class="material-symbols-outlined">add</span>
+            </div>
+            <span class="btn-text">Abrir Nova OS</span>
+            <span class="btn-hint">Solicite reparos em segundos para qualquer equipamento</span>
+        </button>
+
+        <section class="table-container">
+            <header class="table-header">
+                <h3><span class="material-symbols-outlined">history</span> Minhas Solicitações Recentes</h3>
+                <div class="table-tools">
+                    <button class="btn-icon"><span class="material-symbols-outlined">filter_list</span></button>
+                    <button class="btn-icon"><span class="material-symbols-outlined">search</span></button>
+                </div>
+            </header>
+            <div class="scroll-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>N° OS</th>
+                            <th>Equipamento</th>
+                            <th>Setor</th>
+                            <th>Status</th>
+                            <th>Prioridade</th>
+                            <th class="text-right">Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="os-number">#0042</td>
+                            <td>
+                                <div class="item-cell">
+                                    <div class="item-icon"><span class="material-symbols-outlined">precision_manufacturing</span></div>
+                                    Máquina de costura #12
+                                </div>
+                            </td>
+                            <td>Costura</td>
+                            <td><span class="badge badge-open">Aberta</span></td>
+                            <td><span class="badge badge-urgent">Urgente</span></td>
+                            <td class="text-right date-font">10/03/2026</td>
+                        </tr>
+                        <tr>
+                            <td class="os-number">#0041</td>
+                            <td>
+                                <div class="item-cell">
+                                    <div class="item-icon"><span class="material-symbols-outlined">elevator</span></div>
+                                    Elevador de carga
+                                </div>
+                            </td>
+                            <td>Montagem</td>
+                            <td><span class="badge badge-process">Em Atendimento</span></td>
+                            <td><span class="badge badge-high">Alta</span></td>
+                            <td class="text-right date-font">10/03/2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <footer class="table-footer">
+                <a href="#" class="view-all">Ver todo o histórico de solicitações <span class="material-symbols-outlined">arrow_forward</span></a>
+            </footer>
+        </section>
+
+        <section class="info-grid">
+            <div class="promo-card">
+                <div class="promo-content">
+                    <h3>Manutenção Preventiva</h3>
+                    <p>Sua linha de produção operando com máxima eficiência.</p>
+                </div>
+            </div>
+            <div class="tip-card">
+                <h3><span class="material-symbols-outlined">info</span> Dica de Segurança</h3>
+                <p>Sempre descreva o problema com o máximo de detalhes possível e anexe uma foto se necessário. Isso agiliza o tempo de resposta em até 30%.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="page-footer">
+        <p>© Dilly Sports - Central de Manutenção 4.0</p>
+        <nav class="footer-links">
+            <a href="#">Suporte</a>
+            <a href="#">Privacidade</a>
+            <a href="#">Termos</a>
+        </nav>
+    </footer>
+
+</body>
+</html>

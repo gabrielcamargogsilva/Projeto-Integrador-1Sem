@@ -118,15 +118,6 @@ CREATE TABLE estoque_peca (
     criado_em       TIMESTAMP    NOT NULL DEFAULT NOW()
 );
 
--- TABELA 10: PECA_USADA_OS
-CREATE TABLE peca_usada_os (
-    id_peca_usada   SERIAL    PRIMARY KEY,
-    id_os           INT       NOT NULL REFERENCES ordem_servico(id_os),
-    id_peca         INT       NOT NULL REFERENCES estoque_peca(id_peca),
-    quantidade_usada INT      NOT NULL CHECK (quantidade_usada > 0),
-    registrado_em   TIMESTAMP NOT NULL DEFAULT NOW()
-);
-
 
 -- DADOS INICIAIS — para testar o sistema
 

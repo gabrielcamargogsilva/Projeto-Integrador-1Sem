@@ -5,16 +5,13 @@ title Diagrama de Casos de Uso - Manutenção Industrial
 
 left to right direction
 
-' --- Definição de Atores ---
 actor "Solicitante" as S
 actor "Técnico" as T
 actor "Gestor" as G
 
-' --- Herança de Atores ---
-' O Gestor pode realizar tudo que o Solicitante faz
+'O Gestor pode realizar tudo que o Solicitante faz
 G -up-|> S
 
-' --- Sistema ---
 rectangle "Sistema de Gestão de Manutenção" {
     
     usecase "Abrir Ordem de Serviço" as UC01
@@ -28,27 +25,21 @@ rectangle "Sistema de Gestão de Manutenção" {
     
     usecase "Consultar Histórico de Equipamento" as UC05
     
-    usecase "Visualizar Dashboard de KPIs" as UC06
+    usecase "Visualizar Dashboard de Métricas e Relatórios" as UC06
     
     usecase "Manter Usuários e Técnicos" as UC_MAN_USER
 
-    ' --- Relacionamentos de Inclusão/Extensão ---
     UC01 <.. UC_CAD_EQUIP : <<extend>>
     UC04 ..> UC03 : <<extend>>
 }
 
-' --- Associações dos Atores ---
-
-' Solicitante
 S --> UC01
 S --> UC05
 
-' Técnico
 T --> UC03
 T --> UC04
 T --> UC05
 
-' Gestor
 G --> UC02
 G --> UC05
 G --> UC06
