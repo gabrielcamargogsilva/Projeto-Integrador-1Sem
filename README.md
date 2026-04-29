@@ -17,10 +17,6 @@ Nosso objetivo é solucionar este problema através de:
 | Foto | Nome | GitHub | Função no Projeto |
 | :---: | :--- | :---: | :--- |
 <<<<<<< HEAD
-| <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Sem função no momento |
-| <img src="https://github.com/paulopoppes-hash.png" width="50px"> | **Paulo Poppes** | [Link](https://github.com/paulopoppes-hash) | Sem função no momento  |
-| <img src="https://github.com/ScardiaSam34.png" width="50px"> | **Samuel Cardia** | [Link](https://github.com/ScardiaSam34) | Sem função no momento  |
-| <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Sem função no momento  |
 =======
 | <img src="https://github.com/GustavoTucci.png" width="50px"> | **Gustavo Tucci** | [Link](https://github.com/GustavoTucci) | Front-End, Documentação |
 | <img src="https://github.com/vfazano.png" width="50px"> | **Vitor Fazano** | [Link](https://github.com/vfazano) | Banco de Dados, Documentação |
