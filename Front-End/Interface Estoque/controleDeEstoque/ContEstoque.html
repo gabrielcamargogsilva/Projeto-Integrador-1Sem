@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle de Estoque — Central de Manutenção 4.0</title>
+  <link rel="stylesheet" href="ContEstoque.css" />
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      Central de Manutenção
+      <span>4.0</span>
+    </div>
+
+    <div class="navbar-nav">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Ordens de Serviço</a>
+      <a href="#" class="nav-link">Técnicos</a>
+      <a href="#" class="nav-link active">Estoque</a>
+      <a href="#" class="nav-link">Ferramentas</a>
+      <a href="#" class="nav-link">Relatórios</a>
+    </div>
+
+    <div class="navbar-right">
+      <div class="search-bar">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscar peça…" />
+      </div>
+
+      <button class="icon-btn" title="Notificações">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </button>
+
+      <button class="icon-btn" title="Configurações">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+
+      <button class="nav-text-btn">Sair</button>
+      <div class="avatar">JD</div>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="#">Inventário</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Geral</span>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Controle de Estoque</h1>
+        <p>Gerenciamento centralizado de componentes industriais, lubrificantes e peças de reposição para a linha de produção.</p>
+      </div>
+      <button class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Cadastrar Peça
+      </button>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-label">Total de Itens</div>
+        <div class="stat-value">1.284</div>
+        <div class="stat-badge up">+12 novos este mês</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Abaixo do Mínimo</div>
+        <div class="stat-value danger">14</div>
+        <div class="stat-badge danger">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Ação imediata requerida
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Valor em Estoque</div>
+        <div class="stat-value">R$ 142k</div>
+        <div class="stat-sub">Atualizado há 2 horas</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Pedidos Pendentes</div>
+        <div class="stat-value">08</div>
+        <div class="stat-badge info">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          3 chegam hoje
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-section">
+
+      <!-- Toolbar -->
+      <div class="table-toolbar">
+        <div class="toolbar-left">
+          <button class="btn-outline">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filtros
+          </button>
+          <button class="btn-outline">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar
+          </button>
+        </div>
+        <div class="toolbar-right">Mostrando 1–10 de <strong>84</strong> peças</div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome da Peça</th>
+              <th>Categoria</th>
+              <th>Qtd Atual</th>
+              <th>Qtd Mínima</th>
+              <th>Unid</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>
+                <div class="part-name-cell">
+                  <div class="part-icon mecanica">⚙</div>
+                  <span class="part-name">Rolamento Esférico 22215-E1</span>
+                </div>
+              </td>
+              <td>Mecânica</td>
+              <td><span class="qty-normal">42</span></td>
+              <td><span class="qty-normal">10</span></td>
+              <td>UN</td>
+              <td><span class="status-badge ok">OK</span></td>
+              <td><a href="#" class="action-link">Detalhes</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name-cell">
+                  <div class="part-icon quimica">⚗</div>
+                  <span class="part-name">Lubrificante Industrial ISO VG 68</span>
+                </div>
+              </td>
+              <td>Químicos</td>
+              <td><span class="qty-danger">12</span></td>
+              <td><span class="qty-normal">25</span></td>
+              <td>L</td>
+              <td>
+                <span class="status-badge abaixo">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  ABAIXO DO MÍNIMO
+                </span>
+              </td>
+              <td><a href="#" class="action-link">Detalhes</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name-cell">
+                  <div class="part-icon eletrica">⚡</div>
+                  <span class="part-name">Contator Trifásico 220V 18A</span>
+                </div>
+              </td>
+              <td>Elétrica</td>
+              <td><span class="qty-normal">08</span></td>
+              <td><span class="qty-normal">05</span></td>
+              <td>UN</td>
+              <td><span class="status-badge ok">OK</span></td>
+              <td><a href="#" class="action-link">Detalhes</a></td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="part-name-cell">
+                  <div class="part-icon mecanica">⚙</div>
+                  <span class="part-name">Correia em V Industrial A-42</span>
+                </div>
+              </td>
+              <td>Mecânica</td>
+              <td><span class="qty-normal">114</span></td>
+              <td><span class="qty-normal">40</span></td>
+              <td>UN</td>
+              <td><span class="status-badge ok">OK</span></td>
+              <td><a href="#" class="action-link">Detalhes</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="table-footer">
+        <div class="pagination">
+          <button class="page-btn arrow">‹</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span class="page-ellipsis">…</span>
+          <button class="page-btn">9</button>
+          <button class="page-btn arrow">›</button>
+        </div>
+        <div class="per-page">
+          Itens por página:
+          <select>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── SITE FOOTER ── -->
+  <footer class="site-footer">
+    <span>© 2024 Dilly Sports — Gestor Industrial</span>
+    <div class="footer-links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Privacidade</a>
+      <a href="#">Suporte Técnico</a>
+    </div>
+  </footer>
+
+</body>
+</html>
