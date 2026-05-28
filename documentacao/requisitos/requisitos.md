@@ -8,7 +8,6 @@ Operador de setor
 Abre ordens de serviço
 Descreve o problema
 Acompanha status da OS
-Consulta histórico do setor
 
 ### Técnico
 Equipe de manutenção
