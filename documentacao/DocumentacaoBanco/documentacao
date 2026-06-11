@@ -1,0 +1,476 @@
+Perfeito. Com base no seu projeto **Sistema de Gerenciamento de Manutenção (SGM) - Dilly Sports**, no DER que você enviou e nas imagens do modelo conceitual/lógico, posso montar a seção de **Documentação do Banco de Dados** para adicionar diretamente na Wiki.
+
+---
+
+# 🗄️ Documentação do Banco de Dados
+
+## Sistema de Gerenciamento de Manutenção (SGM) - Dilly Sports
+
+### Objetivo
+
+O banco de dados do Sistema de Gerenciamento de Manutenção (SGM) foi desenvolvido para controlar e rastrear todo o ciclo de manutenção industrial da Dilly Sports, desde a abertura de uma Ordem de Serviço (OS) até a devolução das ferramentas utilizadas e atualização do histórico do equipamento.
+
+A estrutura foi projetada para atender quatro áreas principais:
+
+* Operação Industrial
+* Manutenção
+* Almoxarifado
+* Administração
+
+---
+
+# Modelo de Dados
+
+## Entidades Principais
+
+| Entidade              | Finalidade                                  |
+| --------------------- | ------------------------------------------- |
+| Usuarios              | Controle de acesso ao sistema               |
+| Equipamentos          | Cadastro dos ativos industriais             |
+| Ordens_Servico        | Registro das manutenções                    |
+| Requisicoes_Materiais | Solicitação de peças e ferramentas          |
+| Itens_Requisicao      | Itens solicitados em cada requisição        |
+| Controle_Ferramental  | Controle de empréstimos e devoluções        |
+| Itens_Almoxarifado    | Estoque de peças e ferramentas              |
+| Entradas_Estoque      | Registro de entradas de materiais           |
+| Itens_Entrada_Estoque | Itens pertencentes a uma entrada            |
+| Kits_Padrao           | Conjunto padrão de ferramentas              |
+| Itens_Composicao_Kit  | Itens que compõem cada kit                  |
+| Maquinas              | Cadastro complementar de ativos industriais |
+
+---
+
+# Dicionário de Dados
+
+## Tabela: usuarios
+
+Responsável pelo gerenciamento dos acessos ao sistema.
+
+| Campo          | Tipo         | Restrição |
+| -------------- | ------------ | --------- |
+| id             | INT          | PK        |
+| nome           | VARCHAR(100) | NOT NULL  |
+| email          | VARCHAR(150) | UNIQUE    |
+| senha          | VARCHAR(255) | NOT NULL  |
+| cargo          | VARCHAR(50)  | NOT NULL  |
+| status_usuario | VARCHAR(20)  | NOT NULL  |
+| data_cadastro  | TIMESTAMP    | NOT NULL  |
+
+---
+
+## Tabela: equipamentos
+
+Cadastro dos equipamentos monitorados pela manutenção.
+
+| Campo              | Tipo         | Restrição |
+| ------------------ | ------------ | --------- |
+| tag                | VARCHAR(20)  | PK        |
+| nome               | VARCHAR(100) | NOT NULL  |
+| setor              | VARCHAR(50)  | NOT NULL  |
+| critico            | BOOLEAN      | NOT NULL  |
+| status_equipamento | VARCHAR(30)  | NOT NULL  |
+
+---
+
+## Tabela: maquinas
+
+Cadastro dos ativos produtivos.
+
+| Campo         | Tipo         | Restrição |
+| ------------- | ------------ | --------- |
+| codigo        | VARCHAR(20)  | PK        |
+| nome          | VARCHAR(100) | NOT NULL  |
+| ativa         | BOOLEAN      | NOT NULL  |
+| data_cadastro | TIMESTAMP    | NOT NULL  |
+
+---
+
+## Tabela: itens_almoxarifado
+
+Controla o estoque físico da empresa.
+
+| Campo            | Tipo           |
+| ---------------- | -------------- |
+| codigo           | VARCHAR(30) PK |
+| nome             | VARCHAR(100)   |
+| categoria        | VARCHAR(50)    |
+| qtd_atual        | INT            |
+| qtd_minima       | INT            |
+| localizacao      | VARCHAR(50)    |
+| data_atualizacao | TIMESTAMP      |
+
+---
+
+## Tabela: ordens_servico
+
+Armazena todas as intervenções de manutenção.
+
+| Campo                  | Tipo               |
+| ---------------------- | ------------------ |
+| id                     | INT PK             |
+| codigo_os              | VARCHAR(20) UNIQUE |
+| equipamento_tag        | VARCHAR(20) FK     |
+| tipo_falha             | VARCHAR(50)        |
+| descricao_problema     | TEXT               |
+| solicitante_id         | INT FK             |
+| tecnico_id             | INT FK             |
+| status_os              | VARCHAR(30)        |
+| data_abertura          | TIMESTAMP          |
+| data_inicio_manutencao | TIMESTAMP          |
+| data_fechamento        | TIMESTAMP          |
+| diagnostico_tecnico    | TEXT               |
+
+---
+
+## Tabela: requisicoes_materiais
+
+Solicitações realizadas pelos técnicos.
+
+| Campo             | Tipo        |
+| ----------------- | ----------- |
+| id                | INT PK      |
+| os_id             | INT FK      |
+| tecnico_id        | INT FK      |
+| status_requisicao | VARCHAR(30) |
+| data_solicitacao  | TIMESTAMP   |
+
+---
+
+## Tabela: itens_requisicao
+
+Itens pertencentes às requisições.
+
+| Campo                 | Tipo           |
+| --------------------- | -------------- |
+| id                    | INT PK         |
+| requisicao_id         | INT FK         |
+| item_codigo           | VARCHAR(30) FK |
+| quantidade_solicitada | INT            |
+| tipo_solicitacao      | VARCHAR(20)    |
+
+---
+
+## Tabela: controle_ferramental
+
+Controla cautelas e devoluções de ferramentas.
+
+| Campo          | Tipo               |
+| -------------- | ------------------ |
+| id             | INT PK             |
+| codigo_retorno | VARCHAR(30) UNIQUE |
+| requisicao_id  | INT FK             |
+| tecnico_id     | INT FK             |
+| item_codigo    | VARCHAR(30) FK     |
+| status_ativo   | VARCHAR(20)        |
+| data_retirada  | TIMESTAMP          |
+| data_devolucao | TIMESTAMP          |
+| almoxarife_id  | INT FK             |
+
+---
+
+## Tabela: kits_padrao
+
+Kits pré-configurados utilizados nas manutenções.
+
+| Campo     | Tipo         |
+| --------- | ------------ |
+| id        | INT PK       |
+| nome_kit  | VARCHAR(100) |
+| descricao | TEXT         |
+
+---
+
+## Tabela: itens_composicao_kit
+
+Relaciona os itens de cada kit.
+
+| Campo                 | Tipo           |
+| --------------------- | -------------- |
+| id                    | INT PK         |
+| kit_id                | INT FK         |
+| item_codigo           | VARCHAR(30) FK |
+| quantidade_necessaria | INT            |
+
+---
+
+## Tabela: entradas_estoque
+
+Registro de entradas de materiais.
+
+| Campo         | Tipo        |
+| ------------- | ----------- |
+| id            | INT PK      |
+| tipo_entrada  | VARCHAR(30) |
+| chave_nfe     | VARCHAR(50) |
+| data_entrada  | TIMESTAMP   |
+| almoxarife_id | INT FK      |
+
+---
+
+## Tabela: itens_entrada_estoque
+
+Itens associados às entradas.
+
+| Campo       | Tipo           |
+| ----------- | -------------- |
+| id          | INT PK         |
+| entrada_id  | INT FK         |
+| item_codigo | VARCHAR(30) FK |
+| quantidade  | INT            |
+
+---
+
+# Relacionamentos
+
+## Usuários e Ordens de Serviço
+
+* Um usuário pode abrir várias Ordens de Serviço.
+* Um técnico pode atender várias Ordens de Serviço.
+
+Cardinalidade:
+
+```text
+USUARIOS (1) ---- (N) ORDENS_SERVICO
+```
+
+---
+
+## Equipamentos e Ordens de Serviço
+
+Um equipamento pode possuir várias intervenções ao longo de sua vida útil.
+
+```text
+EQUIPAMENTOS (1) ---- (N) ORDENS_SERVICO
+```
+
+---
+
+## Ordem de Serviço e Requisição
+
+Uma Ordem de Serviço pode gerar várias requisições de materiais.
+
+```text
+ORDENS_SERVICO (1) ---- (N) REQUISICOES_MATERIAIS
+```
+
+---
+
+## Requisição e Itens
+
+Uma requisição possui vários itens.
+
+```text
+REQUISICOES_MATERIAIS (1) ---- (N) ITENS_REQUISICAO
+```
+
+---
+
+## Kit e Composição
+
+Um kit é formado por diversos itens.
+
+```text
+KITS_PADRAO (1) ---- (N) ITENS_COMPOSICAO_KIT
+```
+
+---
+
+## Entrada de Estoque
+
+Uma entrada pode registrar diversos materiais.
+
+```text
+ENTRADAS_ESTOQUE (1) ---- (N) ITENS_ENTRADA_ESTOQUE
+```
+
+---
+
+# Regras de Negócio
+
+### RN01
+
+Toda Ordem de Serviço deve possuir um solicitante válido.
+
+### RN02
+
+Uma OS somente poderá ser finalizada após preenchimento do diagnóstico técnico.
+
+### RN03
+
+Uma requisição de material deve estar vinculada a uma Ordem de Serviço.
+
+### RN04
+
+O estoque não poderá assumir quantidade negativa.
+
+### RN05
+
+Ferramentas emprestadas devem possuir registro de devolução.
+
+### RN06
+
+Kits padrão devem possuir pelo menos um item associado.
+
+### RN07
+
+Equipamentos classificados como críticos possuem prioridade máxima na fila de manutenção.
+
+### RN08
+
+Ao concluir uma manutenção, deve ser criado automaticamente um registro no histórico do equipamento.
+
+---
+
+# Fluxo de Persistência de Dados
+
+```text
+Operador
+    ↓
+Ordens de Serviço
+    ↓
+Técnico assume OS
+    ↓
+Requisição de Materiais
+    ↓
+Baixa de Estoque
+    ↓
+Controle de Ferramental
+    ↓
+Conclusão da Manutenção
+    ↓
+Histórico da Máquina
+```
+
+---
+
+# Tecnologia de Persistência
+
+O sistema utiliza o navegador como mecanismo de armazenamento local através do LocalStorage, simulando um banco relacional.
+
+Prefixo padrão:
+
+```text
+sgm_
+```
+
+Exemplos:
+
+```text
+sgm_usuarios
+sgm_equipamentos
+sgm_ordens_servico
+sgm_requisicoes_materiais
+sgm_controle_ferramental
+sgm_itens_almoxarifado
+```
+
+Essa abordagem permite funcionamento totalmente offline, sem dependência de servidores externos ou banco de dados físico.
+
+Como você utilizou o **Neon PostgreSQL** durante o desenvolvimento/modelagem do banco, vale a pena atualizar a seção de tecnologia de persistência para refletir isso corretamente.
+
+Você pode substituir a seção **"Tecnologia de Persistência"** por esta:
+
+---
+
+# 🗄️ Tecnologia de Persistência
+
+Durante a fase de análise, modelagem e validação da estrutura do banco de dados, foi utilizada a plataforma cloud **[Neon PostgreSQL](https://console.neon.tech?utm_source=chatgpt.com)**, um serviço de banco de dados PostgreSQL gerenciado em nuvem.
+
+O Neon foi utilizado para:
+
+* Criação e validação do Modelo Relacional.
+* Definição das tabelas e relacionamentos.
+* Testes de integridade referencial.
+* Simulação do ambiente de produção utilizando PostgreSQL.
+* Geração dos scripts SQL do projeto.
+
+### Benefícios do Neon PostgreSQL
+
+* Banco de dados PostgreSQL nativo.
+* Hospedagem em nuvem.
+* Criação automática de branches para testes.
+* Escalabilidade sob demanda.
+* Interface web intuitiva para administração dos dados.
+* Compatibilidade total com SQL padrão PostgreSQL.
+
+---
+
+# Arquitetura de Dados do Projeto
+
+O projeto foi concebido em duas camadas distintas:
+
+## Ambiente de Modelagem e Banco Relacional
+
+Utilizado para projeto, modelagem e validação:
+
+```text
+Neon PostgreSQL
+↓
+Modelo Relacional
+↓
+Scripts SQL
+↓
+Validação das Regras de Negócio
+```
+
+## Ambiente de Execução do Protótipo
+
+Devido às limitações de infraestrutura de rede e servidores da fábrica Dilly Sports, o protótipo funcional foi desenvolvido utilizando armazenamento local no navegador.
+
+```text
+HTML + CSS + JavaScript
+↓
+Mock Database (mockDb.js)
+↓
+LocalStorage
+```
+
+---
+
+# Estrutura de Persistência
+
+## Banco Relacional (Neon PostgreSQL)
+
+Principais tabelas implementadas:
+
+* usuarios
+* equipamentos
+* maquinas
+* ordens_servico
+* requisicoes_materiais
+* itens_requisicao
+* itens_almoxarifado
+* controle_ferramental
+* kits_padrao
+* itens_composicao_kit
+* entradas_estoque
+* itens_entrada_estoque
+
+---
+
+## Banco Simulado (LocalStorage)
+
+Para execução offline do protótipo foram criadas as seguintes chaves:
+
+```text
+sgm_usuarios
+sgm_equipamentos
+sgm_ordens_servico
+sgm_requisicoes_materiais
+sgm_itens_almoxarifado
+sgm_controle_ferramental
+sgm_kits_padrao
+sgm_historico_maquinas
+```
+
+---
+
+# Justificativa Técnica
+
+A utilização do Neon PostgreSQL permitiu projetar o sistema seguindo boas práticas de bancos relacionais corporativos, garantindo normalização, integridade referencial e escalabilidade futura.
+
+Já a utilização do LocalStorage possibilitou a construção de um protótipo de alta fidelidade totalmente funcional e executável offline, sem necessidade de infraestrutura de servidores ou conexão com internet durante as demonstrações acadêmicas e validações do projeto.
+
+---
+
+Essa versão fica mais profissional para TCC, SENAI e apresentação para a Dilly Sports, porque mostra que o projeto foi modelado em um banco PostgreSQL real (Neon), mas implementado em modo protótipo usando LocalStorage.
