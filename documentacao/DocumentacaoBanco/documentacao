@@ -1,6 +1,3 @@
-Perfeito. Com base no seu projeto **Sistema de Gerenciamento de Manutenção (SGM) - Dilly Sports**, no DER que você enviou e nas imagens do modelo conceitual/lógico, posso montar a seção de **Documentação do Banco de Dados** para adicionar diretamente na Wiki.
-
----
 
 # 🗄️ Documentação do Banco de Dados
 
@@ -372,105 +369,309 @@ Você pode substituir a seção **"Tecnologia de Persistência"** por esta:
 
 ---
 
-# 🗄️ Tecnologia de Persistência
+🗄️ Sistema Gerenciador de Banco de Dados (SGBD)
 
-Durante a fase de análise, modelagem e validação da estrutura do banco de dados, foi utilizada a plataforma cloud **[Neon PostgreSQL](https://console.neon.tech?utm_source=chatgpt.com)**, um serviço de banco de dados PostgreSQL gerenciado em nuvem.
+O banco de dados do Sistema de Gerenciamento de Manutenção (SGM) foi desenvolvido utilizando o PostgreSQL, um Sistema Gerenciador de Banco de Dados Relacional (SGBDR) amplamente utilizado em aplicações corporativas devido à sua robustez, segurança e desempenho.
 
-O Neon foi utilizado para:
+Motivos da Escolha
 
-* Criação e validação do Modelo Relacional.
-* Definição das tabelas e relacionamentos.
-* Testes de integridade referencial.
-* Simulação do ambiente de produção utilizando PostgreSQL.
-* Geração dos scripts SQL do projeto.
+O PostgreSQL foi escolhido por oferecer:
 
-### Benefícios do Neon PostgreSQL
+Suporte a relacionamentos complexos.
+Integridade referencial através de chaves primárias e estrangeiras.
+Alto desempenho para consultas e relatórios.
+Segurança e controle de acesso aos dados.
+Escalabilidade para futuras expansões do sistema.
+Compatibilidade com SQL padrão.
+Estrutura do Banco de Dados
 
-* Banco de dados PostgreSQL nativo.
-* Hospedagem em nuvem.
-* Criação automática de branches para testes.
-* Escalabilidade sob demanda.
-* Interface web intuitiva para administração dos dados.
-* Compatibilidade total com SQL padrão PostgreSQL.
+O banco foi modelado seguindo os princípios da modelagem relacional e normalização de dados, sendo composto pelas seguintes tabelas principais:
 
----
-
-# Arquitetura de Dados do Projeto
-
-O projeto foi concebido em duas camadas distintas:
-
-## Ambiente de Modelagem e Banco Relacional
-
-Utilizado para projeto, modelagem e validação:
-
-```text
-Neon PostgreSQL
-↓
+Tabela	Função
+usuarios	Controle de acesso ao sistema
+equipamentos	Cadastro dos equipamentos industriais
+maquinas	Cadastro dos ativos produtivos
+ordens_servico	Controle das Ordens de Serviço
+requisicoes_materiais	Solicitações de materiais e ferramentas
+itens_requisicao	Itens pertencentes às requisições
+itens_almoxarifado	Controle de estoque
+controle_ferramental	Controle de empréstimos e devoluções
+kits_padrao	Cadastro de kits de ferramentas
+itens_composicao_kit	Composição dos kits
+entradas_estoque	Registro de entradas no estoque
+itens_entrada_estoque	Itens de cada entrada de estoque
 Modelo Relacional
-↓
-Scripts SQL
-↓
-Validação das Regras de Negócio
-```
 
-## Ambiente de Execução do Protótipo
+O banco de dados foi estruturado com relacionamentos do tipo:
 
-Devido às limitações de infraestrutura de rede e servidores da fábrica Dilly Sports, o protótipo funcional foi desenvolvido utilizando armazenamento local no navegador.
+Um para Muitos (1:N)
+Muitos para Muitos (N:N), implementados através de tabelas associativas.
+Exemplos
+USUARIOS (1) → (N) ORDENS_SERVICO
 
-```text
-HTML + CSS + JavaScript
-↓
-Mock Database (mockDb.js)
-↓
-LocalStorage
-```
+ORDENS_SERVICO (1) → (N) REQUISICOES_MATERIAIS
 
----
+REQUISICOES_MATERIAIS (1) → (N) ITENS_REQUISICAO
 
-# Estrutura de Persistência
+KITS_PADRAO (1) → (N) ITENS_COMPOSICAO_KIT
 
-## Banco Relacional (Neon PostgreSQL)
+ENTRADAS_ESTOQUE (1) → (N) ITENS_ENTRADA_ESTOQUE
+Integridade dos Dados
 
-Principais tabelas implementadas:
+Para garantir a consistência das informações foram utilizadas:
 
-* usuarios
-* equipamentos
-* maquinas
-* ordens_servico
-* requisicoes_materiais
-* itens_requisicao
-* itens_almoxarifado
-* controle_ferramental
-* kits_padrao
-* itens_composicao_kit
-* entradas_estoque
-* itens_entrada_estoque
+Chaves Primárias (PK)
 
----
+Responsáveis por identificar unicamente cada registro.
 
-## Banco Simulado (LocalStorage)
+Exemplos:
 
-Para execução offline do protótipo foram criadas as seguintes chaves:
+usuarios.id
+ordens_servico.id
+requisicoes_materiais.id
+kits_padrao.id
+Chaves Estrangeiras (FK)
 
-```text
-sgm_usuarios
-sgm_equipamentos
-sgm_ordens_servico
-sgm_requisicoes_materiais
-sgm_itens_almoxarifado
-sgm_controle_ferramental
-sgm_kits_padrao
-sgm_historico_maquinas
-```
+Responsáveis pela integridade referencial entre as tabelas.
 
----
+Exemplos:
 
-# Justificativa Técnica
+ordens_servico.equipamento_tag
+ordens_servico.solicitante_id
+ordens_servico.tecnico_id
 
-A utilização do Neon PostgreSQL permitiu projetar o sistema seguindo boas práticas de bancos relacionais corporativos, garantindo normalização, integridade referencial e escalabilidade futura.
+requisicoes_materiais.os_id
 
-Já a utilização do LocalStorage possibilitou a construção de um protótipo de alta fidelidade totalmente funcional e executável offline, sem necessidade de infraestrutura de servidores ou conexão com internet durante as demonstrações acadêmicas e validações do projeto.
+itens_requisicao.requisicao_id
 
----
+controle_ferramental.item_codigo
+Regras Implementadas no Banco
+Uma Ordem de Serviço deve estar vinculada a um equipamento.
+Uma requisição deve estar vinculada a uma Ordem de Serviço.
+Um item requisitado deve existir no almoxarifado.
+Um kit deve possuir pelo menos um item associado.
+O estoque não pode possuir quantidade negativa.
+Toda devolução de ferramenta deve ser registrada.
+Equipamentos críticos possuem prioridade no fluxo de manutenção.
+Banco de Dados do Projeto
 
-Essa versão fica mais profissional para TCC, SENAI e apresentação para a Dilly Sports, porque mostra que o projeto foi modelado em um banco PostgreSQL real (Neon), mas implementado em modo protótipo usando LocalStorage.
+SGBD Utilizado: PostgreSQL
+Modelo: Relacional
+Normalização: Até a 3ª Forma Normal (3FN)
+Quantidade de Tabelas: 12
+Objetivo: Controle completo do ciclo de manutenção industrial, almoxarifado, ferramental e rastreabilidade das Ordens de Serviço.
+📜 Script de Criação do Banco de Dados (DDL)
+
+O banco de dados foi implementado utilizando PostgreSQL, com tabelas normalizadas e relacionamentos baseados no modelo entidade-relacionamento desenvolvido para o Sistema de Gerenciamento de Manutenção (SGM).
+
+Criação do Banco
+CREATE DATABASE sgm_dillysports;
+Tabela: usuarios
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    status_usuario VARCHAR(20) DEFAULT 'ATIVO',
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+Tabela: equipamentos
+CREATE TABLE equipamentos (
+    tag VARCHAR(20) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    setor VARCHAR(100) NOT NULL,
+    critico BOOLEAN DEFAULT FALSE,
+    status_equipamento VARCHAR(30) NOT NULL
+);
+Tabela: maquinas
+CREATE TABLE maquinas (
+    codigo VARCHAR(20) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    ativa BOOLEAN DEFAULT TRUE,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+Tabela: itens_almoxarifado
+CREATE TABLE itens_almoxarifado (
+    codigo VARCHAR(30) PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    qtd_atual INTEGER NOT NULL DEFAULT 0,
+    qtd_minima INTEGER NOT NULL DEFAULT 0,
+    localizacao VARCHAR(50),
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+Tabela: ordens_servico
+CREATE TABLE ordens_servico (
+    id SERIAL PRIMARY KEY,
+    codigo_os VARCHAR(20) UNIQUE NOT NULL,
+    equipamento_tag VARCHAR(20) NOT NULL,
+    tipo_falha VARCHAR(50),
+    descricao_problema TEXT,
+    solicitante_id INTEGER NOT NULL,
+    tecnico_id INTEGER,
+    status_os VARCHAR(30) DEFAULT 'ABERTA',
+    data_abertura TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_inicio_manutencao TIMESTAMP,
+    data_fechamento TIMESTAMP,
+    diagnostico_tecnico TEXT,
+
+    CONSTRAINT fk_os_equipamento
+        FOREIGN KEY (equipamento_tag)
+        REFERENCES equipamentos(tag),
+
+    CONSTRAINT fk_os_solicitante
+        FOREIGN KEY (solicitante_id)
+        REFERENCES usuarios(id),
+
+    CONSTRAINT fk_os_tecnico
+        FOREIGN KEY (tecnico_id)
+        REFERENCES usuarios(id)
+);
+Tabela: requisicoes_materiais
+CREATE TABLE requisicoes_materiais (
+    id SERIAL PRIMARY KEY,
+    os_id INTEGER NOT NULL,
+    tecnico_id INTEGER NOT NULL,
+    status_requisicao VARCHAR(30) DEFAULT 'PENDENTE',
+    data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_req_os
+        FOREIGN KEY (os_id)
+        REFERENCES ordens_servico(id),
+
+    CONSTRAINT fk_req_tecnico
+        FOREIGN KEY (tecnico_id)
+        REFERENCES usuarios(id)
+);
+Tabela: itens_requisicao
+CREATE TABLE itens_requisicao (
+    id SERIAL PRIMARY KEY,
+    requisicao_id INTEGER NOT NULL,
+    item_codigo VARCHAR(30) NOT NULL,
+    quantidade_solicitada INTEGER NOT NULL,
+    tipo_solicitacao VARCHAR(20),
+
+    CONSTRAINT fk_item_req
+        FOREIGN KEY (requisicao_id)
+        REFERENCES requisicoes_materiais(id),
+
+    CONSTRAINT fk_item_almox
+        FOREIGN KEY (item_codigo)
+        REFERENCES itens_almoxarifado(codigo)
+);
+Tabela: controle_ferramental
+CREATE TABLE controle_ferramental (
+    id SERIAL PRIMARY KEY,
+    codigo_retorno VARCHAR(30) UNIQUE,
+    requisicao_id INTEGER,
+    tecnico_id INTEGER,
+    item_codigo VARCHAR(30),
+    status_ativo VARCHAR(20),
+    data_retirada TIMESTAMP,
+    data_devolucao TIMESTAMP,
+    almoxarife_id INTEGER,
+
+    CONSTRAINT fk_cf_req
+        FOREIGN KEY (requisicao_id)
+        REFERENCES requisicoes_materiais(id),
+
+    CONSTRAINT fk_cf_tecnico
+        FOREIGN KEY (tecnico_id)
+        REFERENCES usuarios(id),
+
+    CONSTRAINT fk_cf_item
+        FOREIGN KEY (item_codigo)
+        REFERENCES itens_almoxarifado(codigo),
+
+    CONSTRAINT fk_cf_almoxarife
+        FOREIGN KEY (almoxarife_id)
+        REFERENCES usuarios(id)
+);
+Tabela: kits_padrao
+CREATE TABLE kits_padrao (
+    id SERIAL PRIMARY KEY,
+    nome_kit VARCHAR(100) NOT NULL,
+    descricao TEXT
+);
+Tabela: itens_composicao_kit
+CREATE TABLE itens_composicao_kit (
+    id SERIAL PRIMARY KEY,
+    kit_id INTEGER NOT NULL,
+    item_codigo VARCHAR(30) NOT NULL,
+    quantidade_necessaria INTEGER NOT NULL,
+
+    CONSTRAINT fk_kit
+        FOREIGN KEY (kit_id)
+        REFERENCES kits_padrao(id),
+
+    CONSTRAINT fk_item_kit
+        FOREIGN KEY (item_codigo)
+        REFERENCES itens_almoxarifado(codigo)
+);
+Tabela: entradas_estoque
+CREATE TABLE entradas_estoque (
+    id SERIAL PRIMARY KEY,
+    tipo_entrada VARCHAR(30) NOT NULL,
+    chave_nfe VARCHAR(50),
+    data_entrada TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    almoxarife_id INTEGER,
+
+    CONSTRAINT fk_entrada_almox
+        FOREIGN KEY (almoxarife_id)
+        REFERENCES usuarios(id)
+);
+Tabela: itens_entrada_estoque
+CREATE TABLE itens_entrada_estoque (
+    id SERIAL PRIMARY KEY,
+    entrada_id INTEGER NOT NULL,
+    item_codigo VARCHAR(30) NOT NULL,
+    quantidade INTEGER NOT NULL,
+
+    CONSTRAINT fk_entrada_item
+        FOREIGN KEY (entrada_id)
+        REFERENCES entradas_estoque(id),
+
+    CONSTRAINT fk_item_entrada
+        FOREIGN KEY (item_codigo)
+        REFERENCES itens_almoxarifado(codigo)
+);
+🔍 Consultas SQL Importantes
+Ordens de Serviço em Aberto
+SELECT
+    codigo_os,
+    status_os,
+    data_abertura
+FROM ordens_servico
+WHERE status_os <> 'CONCLUIDA';
+Histórico de Manutenções por Equipamento
+SELECT
+    e.nome,
+    os.codigo_os,
+    os.data_abertura,
+    os.data_fechamento,
+    os.diagnostico_tecnico
+FROM equipamentos e
+INNER JOIN ordens_servico os
+ON e.tag = os.equipamento_tag;
+Itens com Estoque Baixo
+SELECT
+    codigo,
+    nome,
+    qtd_atual,
+    qtd_minima
+FROM itens_almoxarifado
+WHERE qtd_atual <= qtd_minima;
+Quantidade de OS por Técnico
+SELECT
+    u.nome,
+    COUNT(os.id) AS total_os
+FROM usuarios u
+INNER JOIN ordens_servico os
+ON u.id = os.tecnico_id
+GROUP BY u.nome;
+📈 Considerações Técnicas
+
+O banco de dados foi desenvolvido seguindo os princípios da modelagem relacional e da Terceira Forma Normal (3FN), reduzindo redundâncias e garantindo integridade dos dados através de chaves primárias, chaves estrangeiras e restrições de unicidade.
+
+A estrutura suporta a rastreabilidade completa das Ordens de Serviço, controle de estoque, gerenciamento de ferramental e histórico de manutenção dos equipamentos da Dilly Sports, permitindo futuras integrações com sistemas ERP, BI e indicadores de manutenção industrial.
