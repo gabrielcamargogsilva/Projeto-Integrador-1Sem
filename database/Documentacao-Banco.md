@@ -675,4 +675,3 @@ GROUP BY u.nome;
 O banco de dados foi desenvolvido seguindo os princípios da modelagem relacional e da Terceira Forma Normal (3FN), reduzindo redundâncias e garantindo integridade dos dados através de chaves primárias, chaves estrangeiras e restrições de unicidade.
 
 A estrutura suporta a rastreabilidade completa das Ordens de Serviço, controle de estoque, gerenciamento de ferramental e histórico de manutenção dos equipamentos da Dilly Sports, permitindo futuras integrações com sistemas ERP, BI e indicadores de manutenção industrial.
-
