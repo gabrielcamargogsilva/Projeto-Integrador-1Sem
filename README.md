@@ -113,21 +113,13 @@ Projeto-Integrador-1Sem/
 │       ├── U_AberturaOS.*            # Abertura de Ordem de Serviço
 │       └── U_Chamados.*              # Acompanhamento de chamados
 │
-├── prototipo/                         # Protótipos visuais das telas
-│   ├── login/
-│   ├── administrador/
-│   ├── tecnico/
-│   ├── almoxarifado/
-│   └── solicitante/
-│
-└── docs/                              # Documentação do projeto
-    ├── PRD.md                         # Product Requirements Document
-    ├── Levantamento_Requisitos.md     # Requisitos e Regras de Negócio
-    └── wiki/                          # Páginas da Wiki
-        ├── Home.md                    # Hub central
-        ├── Manual_do_Usuario.md       # Manual por perfil
-        ├── Arquitetura_e_Dados.md     # Arquitetura técnica
-        └── Guia_de_Instalacao.md      # Guia de instalação
+└── prototipo/                         # Protótipos visuais das telas
+   ├── login/
+   ├── administrador/
+   ├── tecnico/
+   ├── almoxarifado/
+   └── solicitante/
+
 ```
 
 ---
